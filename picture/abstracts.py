@@ -3,7 +3,10 @@ import datetime
 from pathlib import Path
 from typing import Tuple
 
-from PIL import Image, ImageFilter, ImageDraw, ImageFont, UnidentifiedImageError
+from PIL import Image
+from PIL import ImageFilter
+from PIL import ImageDraw
+from PIL import ImageFont
 
 
 class Picture(abc.ABC):
