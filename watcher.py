@@ -14,7 +14,7 @@ PATH_FROM = PATH.joinpath('./temp/')
 PATH_TO = PATH.joinpath('./processed/')
 
 # Выполнено на примере 2-х форматов.
-PICTURE_MAPPER = {
+FORMAT_MAPPER = {
     'jpg': JPGPicture,
     'bmp': BMPPicture,
 }
@@ -25,7 +25,7 @@ class Handler(FileSystemEventHandler):
     def on_created(self, event):
         file_extension = event.src_path.split('.')[-1]
         try:
-            picture = PICTURE_MAPPER[file_extension]().open(event.src_path)
+            picture = FORMAT_MAPPER[file_extension]().open(event.src_path)
             picture.resize((400, 400))
             picture.apply_filter()
             picture.put_the_date()
