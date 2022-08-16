@@ -73,13 +73,13 @@ class BMPPicture(Picture):
         self.filename = ''
         self.file_extension = 'bmp'
 
-    def resize(self, sizes: tuple):
-        self.picture = self.picture.resize((400, 400))
-        return self.picture
+    def resize(self, sizes: Tuple[int]):
+        self.picture = self.picture.resize(sizes)
+        return self
 
     def apply_filter(self, filter_name: str = None):
         self.picture = self.picture.filter(ImageFilter.SMOOTH)
-        return self.picture
+        return self
 
     def put_the_date(self):
         font = ImageFont.load_default()
@@ -91,7 +91,7 @@ class BMPPicture(Picture):
             fill='red',
             size=42,
         )
-        return self.picture
+        return self
 
     def open(self, path: str):
         self.picture = Image.open(path)
