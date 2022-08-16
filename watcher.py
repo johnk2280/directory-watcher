@@ -30,33 +30,6 @@ class Handler(FileSystemEventHandler):
             picture.apply_filter()
             picture.put_the_date()
             picture.save(PATH_TO)
-
-        # Открытие изображения
-        # img = Image.open(event.src_path)
-
-        # Изменение размеров изображения
-        # new_img = img.resize((400, 400))
-
-        # Наложение размытия
-        # new_img = new_img.filter(ImageFilter.SMOOTH)
-
-        # Наложение текущей даты
-        # font = ImageFont.load_default()
-        # pencil = ImageDraw.Draw(new_img)
-        # pencil.text(
-        #     (300, 350),
-        #     f'{datetime.date.today()}',
-        #     font=font,
-        #     fill='red',
-        #     size=42,
-        # )
-
-        # Добавление соли к имени файла для избежания коллизий.
-        # filename = f'{event.src_path.split("/")[-1].split(".")[0]}' \
-        #            f'_{datetime.datetime.now()}'
-        # new_img.save(
-        #     PATH_TO.joinpath(f'{filename}.{file_extension}').as_posix(),
-        # )
         except (KeyError, UnidentifiedImageError):
             pass
 

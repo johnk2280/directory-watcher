@@ -1,5 +1,6 @@
 import abc
 import datetime
+from pathlib import Path
 from typing import Tuple
 
 from PIL import Image, ImageFilter, ImageDraw, ImageFont, UnidentifiedImageError
@@ -24,7 +25,7 @@ class Picture(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def save(self, path: str):
+    def save(self, path: Path):
         pass
 
 
@@ -37,11 +38,11 @@ class JPGPicture(Picture):
 
     def resize(self, sizes: Tuple[int]):
         self.picture = self.picture.resize(sizes)
-        return self.picture
+        return self
 
     def apply_filter(self, filter_name: str = None):
         self.picture = self.picture.filter(ImageFilter.SMOOTH)
-        return self.picture
+        return self
 
     def put_the_date(self):
         font = ImageFont.load_default()
@@ -53,16 +54,16 @@ class JPGPicture(Picture):
             fill='red',
             size=42,
         )
-        return self.picture
+        return self
 
     def open(self, path: str):
         self.picture = Image.open(path)
         self.filename = path.split("/")[-1].split(".")[0]
-        return self.picture
+        return self
 
-    def save(self, path: str):
+    def save(self, path: Path):
         filename = f'{self.filename}_{datetime.datetime.now()}'
-        self.picture.save(path + f'{filename}.{self.file_extension}')
+        self.picture.save(path.joinpath(f'{filename}.{self.file_extension}'))
 
 
 class BMPPicture(Picture):
@@ -95,8 +96,8 @@ class BMPPicture(Picture):
     def open(self, path: str):
         self.picture = Image.open(path)
         self.filename = path.split("/")[-1].split(".")[0]
-        return self.picture
+        return self
 
-    def save(self, path: str):
+    def save(self, path: Path):
         filename = f'{self.filename}_{datetime.datetime.now()}'
-        self.picture.save(path + f'{filename}.{self.file_extension}')
+        self.picture.save(path.joinpath(f'{filename}.{self.file_extension}'))
